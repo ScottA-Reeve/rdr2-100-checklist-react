@@ -5,7 +5,7 @@ function App() {
   return (
     <div
       className="min-h-screen bg-cover bg-center text-white font-serif"
-      style={{ backgroundImage: "url('/western_background.jpg')" }}
+      style={{ backgroundImage: "url('/rdr2_wallpaper.jpg')" }}
     >
       {/* Overlay for better text readability */}
       <div className="min-h-screen bg-black/60 flex flex-col items-center justify-center px-6 py-12">
