@@ -1,30 +1,44 @@
-import React, { useState } from "react";
-import { ChevronDown, ChevronRight } from "lucide-react"; // ✅ for toggle icons
+// src/components/CollapsibleSection.jsx
+import React, { useState, useEffect } from "react";
 
-/**
- * CollapsibleSection
- * Props:
- *  - title: string
- *  - defaultOpen: boolean (optional)
- *  - children: content inside
- */
-export default function CollapsibleSection({ title, defaultOpen = false, children }) {
-  const [isOpen, setIsOpen] = useState(defaultOpen);
+export default function CollapsibleSection({
+  title,
+  defaultOpen = false,
+  children,
+}) {
+  const titleKey = title ? title.replace(/[^a-z0-9]/gi, "_") : "unknown";
+  const storageKey = `rdr2_section_${titleKey}`;
+
+  // ✅ Lazy initialization: read localStorage only once
+  const [isOpen, setIsOpen] = useState(() => {
+    try {
+      const saved = localStorage.getItem(storageKey);
+      if (saved !== null) return saved === "true";
+    } catch (e) {}
+    return defaultOpen;
+  });
+
+  // ✅ Save whenever it changes
+  useEffect(() => {
+    try {
+      localStorage.setItem(storageKey, String(isOpen));
+    } catch (e) {}
+  }, [isOpen, storageKey]);
 
   return (
-    <div className="w-full bg-black/70 rounded-2xl shadow-md">
-      {/* Header */}
+    <div className="bg-black/70 rounded-2xl shadow-md">
       <button
-        className="w-full flex items-center justify-between px-4 py-3 text-left font-bold text-xl hover:bg-black/40 rounded-t-2xl"
         onClick={() => setIsOpen((prev) => !prev)}
-        type="button"
+        className="w-full text-left px-6 py-4 flex justify-between items-center text-xl font-semibold hover:bg-black/50 rounded-t-2xl"
       >
         <span>{title}</span>
-        {isOpen ? <ChevronDown className="w-5 h-5" /> : <ChevronRight className="w-5 h-5" />}
+        <span className="text-yellow-400">{isOpen ? "▲" : "▼"}</span>
       </button>
-
-      {/* Content */}
-      {isOpen && <div className="p-4 border-t border-gray-700">{children}</div>}
+      {isOpen && (
+        <div className="px-6 py-4 border-t border-gray-700 space-y-6">
+          {children}
+        </div>
+      )}
     </div>
   );
 }
