@@ -2,6 +2,7 @@ import React from "react";
 import IntroSection from "./components/IntroSection";
 import SectionPlaceholder from "./components/SectionPlaceholder";
 import BackToTopButton from "./components/BackToTopButton";
+import OverallStrategy from "./components/OverallStrategy"; // ✅ Import the new component
 
 function App() {
   return (
@@ -15,13 +16,9 @@ function App() {
         {/* ✅ Intro Section */}
         <IntroSection />
 
-        {/* ✅ Placeholders for navigation targets */}
+        {/* ✅ Overall Strategy Section */}
         <SectionPlaceholder id="overall-strategy" title="Overall Strategy">
-          <p>
-            This section will explain the rationale for task ordering and why it
-            makes the quest much easier. It will also highlight tasks worth
-            keeping in mind from the very beginning of your playthrough.
-          </p>
+          <OverallStrategy />
         </SectionPlaceholder>
 
         <SectionPlaceholder id="chapter-1" title="Chapter 1">
