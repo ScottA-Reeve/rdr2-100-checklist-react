@@ -7,18 +7,11 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        "rdr2-bg": "url('/rdr2_wallpaper.jpg')", // 👈 point this to your wallpaper
-      },
-      colors: {
-        rdr2: {
-          red: "#A50000",
-          gold: "#D4AF37",
-          black: "#000000",
-        },
+        'rdr2-bg': "url('/rdr2_wallpaper.jpg')",
       },
       fontFamily: {
-        cinzel: ["Cinzel", "serif"],
-        spectral: ["Spectral SC", "serif"],
+        cinzel: ['Cinzel', 'serif'],
+        spectral: ['"Spectral SC"', 'serif'],
       },
     },
   },

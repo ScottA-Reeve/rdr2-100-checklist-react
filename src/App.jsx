@@ -1,19 +1,47 @@
-export default function App() {
-  return (
-    <div className="min-h-screen bg-rdr2-bg bg-cover bg-center text-white flex flex-col items-center justify-center">
-      {/* Dark overlay for readability */}
-      <div className="bg-black/60 p-8 rounded-2xl shadow-2xl text-center max-w-2xl">
-        <h1 className="text-5xl font-cinzel text-rdr2-red drop-shadow-lg mb-4">
-          RDR2 100% Checklist
-        </h1>
-        <p className="text-lg font-spectral text-rdr2-gold mb-6">
-          Track your journey through the wild west and achieve true 100% completion.
-        </p>
+// src/App.jsx
+import React from "react";
 
-        <button className="px-6 py-3 bg-rdr2-red text-white font-cinzel text-lg rounded-xl shadow-lg hover:bg-red-800 transition">
-          Start Tracking
-        </button>
+function App() {
+  return (
+    <div
+      className="min-h-screen bg-cover bg-center text-white font-serif"
+      style={{ backgroundImage: "url('/western_background.jpg')" }}
+    >
+      {/* Overlay for better text readability */}
+      <div className="min-h-screen bg-black/60 flex flex-col items-center justify-center px-6 py-12">
+        
+        <h1 className="text-5xl font-bold mb-6 text-center font-[Cinzel]">
+          Red Dead Redemption 2 - 100% Checklist
+        </h1>
+
+        <div className="max-w-3xl bg-black/70 p-6 rounded-lg shadow-lg space-y-6">
+          {/* Intro Section */}
+          <section>
+            <h2 className="text-3xl font-semibold mb-2 font-[Cinzel]">Intro</h2>
+            <p className="text-lg leading-relaxed">
+              Welcome to the <span className="font-bold">RDR2 100% Completion Checklist</span>.
+              This guide is designed to help you track every task, challenge, and collectible
+              you’ll need to achieve full completion in <em>Red Dead Redemption 2</em>. 
+              Whether you’re a newcomer or returning for another run, this will keep you on track.
+            </p>
+          </section>
+
+          {/* Overall Strategy Section */}
+          <section>
+            <h2 className="text-3xl font-semibold mb-2 font-[Cinzel]">
+              Overall Strategy
+            </h2>
+            <p className="text-lg leading-relaxed">
+              To complete the game efficiently, it’s best to tackle the main story while
+              gradually working through side activities. Some challenges and collectibles
+              become easier later in the game, so plan accordingly. Focus on story missions
+              first, then branch into exploration and hunting once you’ve unlocked the full map.
+            </p>
+          </section>
+        </div>
       </div>
     </div>
   );
 }
+
+export default App;

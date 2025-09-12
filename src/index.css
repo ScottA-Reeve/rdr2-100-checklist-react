@@ -1,12 +1,12 @@
 /* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Spectral+SC:wght@400;600&display=swap');
 
-/* Tailwind Directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* Global styles */
 body {
-  @apply bg-rdr2-bg text-rdr2-gold font-spectral;
+  margin: 0;
+  padding: 0;
 }
