@@ -64,47 +64,47 @@ function IntroSection() {
         <ul className="list-disc list-inside space-y-2 text-lg leading-relaxed">
           <li>
             <a href="#overall-strategy" className="hover:underline">
-              A) Overall Strategy*
+              I) Overall Strategy
             </a>
           </li>
           <li>
             <a href="#chapter-1" className="hover:underline">
-              B) Chapter 1
+             II) Chapter 1
             </a>
           </li>
           <li>
             <a href="#chapter-2" className="hover:underline">
-              C) Chapter 2
+             III) Chapter 2
             </a>
           </li>
           <li>
             <a href="#chapter-3" className="hover:underline">
-              D) Chapter 3
+             IV) Chapter 3
             </a>
           </li>
           <li>
             <a href="#chapter-4" className="hover:underline">
-              E) Chapter 4
+             V) Chapter 4
             </a>
           </li>
           <li>
             <a href="#chapter-5" className="hover:underline">
-              F) Chapter 5
+             VI) Chapter 5
             </a>
           </li>
           <li>
             <a href="#chapter-6" className="hover:underline">
-              G) Chapter 6
+             VII) Chapter 6
             </a>
           </li>
           <li>
             <a href="#epilogues" className="hover:underline">
-              H) Epilogues Part 1 &amp; 2
+             VIII) Epilogues Part 1 &amp; 2
             </a>
           </li>
           <li>
             <a href="#summary" className="hover:underline">
-              I) Summary &amp; Acknowledgements
+             IX) Summary &amp; Acknowledgements
             </a>
           </li>
         </ul>
