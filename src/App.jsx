@@ -1,12 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
-  const [tasks, setTasks] = useState([
+  const initialTasks = [
     { id: 1, text: "Complete all story missions", done: false },
     { id: 2, text: "Find all cigarette cards", done: false },
     { id: 3, text: "Discover all gang hideouts", done: false },
     { id: 4, text: "Hunt legendary animals", done: false },
-  ]);
+  ];
+
+  const [tasks, setTasks] = useState(() => {
+    // Load from localStorage (if exists), otherwise use defaults
+    const saved = localStorage.getItem("rdr2-checklist");
+    return saved ? JSON.parse(saved) : initialTasks;
+  });
+
+  useEffect(() => {
+    // Save to localStorage whenever tasks change
+    localStorage.setItem("rdr2-checklist", JSON.stringify(tasks));
+  }, [tasks]);
 
   const toggleTask = (id) => {
     setTasks(
