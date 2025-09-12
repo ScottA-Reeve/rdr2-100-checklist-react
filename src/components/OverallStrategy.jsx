@@ -143,13 +143,11 @@ Other Considerations:
 ];
 
 export default function OverallStrategy() {
-  // ✅ Lazy initializer so state restores immediately
   const [openStates, setOpenStates] = useState(() => {
     const saved = localStorage.getItem("overallStrategyOpenStates");
     return saved ? JSON.parse(saved) : Array(sections.length).fill(false);
   });
 
-  // ✅ Persist state
   useEffect(() => {
     localStorage.setItem(
       "overallStrategyOpenStates",
@@ -172,7 +170,6 @@ export default function OverallStrategy() {
     <div className="space-y-4 w-full">
       <h2 className="text-2xl font-bold mb-4">Overall Strategy</h2>
 
-      {/* Expand/Collapse buttons */}
       <div className="flex gap-2 mb-4">
         <button
           onClick={expandAll}
@@ -188,7 +185,6 @@ export default function OverallStrategy() {
         </button>
       </div>
 
-      {/* Accordion sections */}
       {sections.map((section, index) => {
         const isOpen = openStates[index];
         return (
@@ -197,7 +193,7 @@ export default function OverallStrategy() {
             className="rounded-2xl shadow-md border bg-white/90 dark:bg-gray-900 w-full"
           >
             <button
-              className={`flex justify-between items-center w-full text-left px-4 py-3 transition-colors duration-200 ${
+              className={`flex justify-between items-center w-full text-left px-4 py-3 transition-colors duration-200 rounded-t-2xl ${
                 isOpen ? "bg-gray-200 dark:bg-gray-800" : ""
               }`}
               onClick={() => toggleSection(index)}
@@ -216,7 +212,7 @@ export default function OverallStrategy() {
                 isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
               }`}
             >
-              <div className="px-4 pb-4 border-t border-gray-300 dark:border-gray-700">
+              <div className="px-4 pb-4 border-t border-gray-300 dark:border-gray-700 rounded-b-2xl">
                 <p className="mt-3 whitespace-pre-line text-gray-800 dark:text-gray-300">
                   {section.content}
                 </p>

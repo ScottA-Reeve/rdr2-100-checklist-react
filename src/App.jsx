@@ -2,7 +2,9 @@ import React from "react";
 import IntroSection from "./components/IntroSection";
 import SectionPlaceholder from "./components/SectionPlaceholder";
 import BackToTopButton from "./components/BackToTopButton";
-import OverallStrategy from "./components/OverallStrategy"; // ✅ new import
+import OverallStrategy from "./components/OverallStrategy";
+import ChapterChecklist from "./components/ChapterChecklist"; // ✅ import
+import chapter1Data from "./data/chapter1Data"; // ✅ import
 
 function App() {
   return (
@@ -21,8 +23,9 @@ function App() {
           <OverallStrategy />
         </SectionPlaceholder>
 
+        {/* ✅ Chapter 1 Checklist */}
         <SectionPlaceholder id="chapter-1" title="Chapter 1">
-          <p>Placeholder for Chapter 1 guide content.</p>
+          <ChapterChecklist title="Chapter 1" activities={chapter1Data} />
         </SectionPlaceholder>
 
         <SectionPlaceholder id="chapter-2" title="Chapter 2">
