@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        'rdr2-bg': "url('/rdr2_wallpaper.jpg')",
+        'rdr2-bg': "url('/rdr2-100-checklist-react/bg.jpg')", 
       },
       fontFamily: {
         cinzel: ['Cinzel', 'serif'],
