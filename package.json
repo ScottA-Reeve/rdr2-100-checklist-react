@@ -2,6 +2,7 @@
   "name": "rdr2-100-checklist-react",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "homepage": "https://ScottA-Reeve.github.io/rdr2-100-checklist-react",
   "scripts": {
     "dev": "vite",
@@ -15,6 +16,7 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.13",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.21",
     "gh-pages": "^6.1.1",
