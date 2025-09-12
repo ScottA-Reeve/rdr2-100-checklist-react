@@ -2,11 +2,11 @@ import React from "react";
 import IntroSection from "./components/IntroSection";
 import SectionPlaceholder from "./components/SectionPlaceholder";
 import BackToTopButton from "./components/BackToTopButton";
-import OverallStrategy from "./components/OverallStrategy"; // ✅ Import the new component
+import OverallStrategy from "./components/OverallStrategy"; // ✅ new import
 
 function App() {
   return (
-    <div className="min-h-screen bg-rdr2-bg bg-cover bg-center text-white font-serif overflow-y-auto scroll-smooth">
+    <div className="min-h-screen bg-rdr2-bg bg-fixed bg-center bg-cover text-white font-serif overflow-y-auto scroll-smooth">
       {/* Overlay container */}
       <div className="min-h-screen bg-black/60 flex flex-col items-center px-6 py-12">
         <h1 className="text-5xl font-bold mb-12 text-center font-[Cinzel]">

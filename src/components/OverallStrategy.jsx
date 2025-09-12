@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ChevronDown, ChevronRight } from "lucide-react";
 
 const sections = [
@@ -143,30 +143,88 @@ Other Considerations:
 ];
 
 export default function OverallStrategy() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  // ✅ Lazy initializer so state restores immediately
+  const [openStates, setOpenStates] = useState(() => {
+    const saved = localStorage.getItem("overallStrategyOpenStates");
+    return saved ? JSON.parse(saved) : Array(sections.length).fill(false);
+  });
+
+  // ✅ Persist state
+  useEffect(() => {
+    localStorage.setItem(
+      "overallStrategyOpenStates",
+      JSON.stringify(openStates)
+    );
+  }, [openStates]);
+
+  const toggleSection = (index) => {
+    setOpenStates((prev) => {
+      const updated = [...prev];
+      updated[index] = !updated[index];
+      return updated;
+    });
+  };
+
+  const expandAll = () => setOpenStates(Array(sections.length).fill(true));
+  const collapseAll = () => setOpenStates(Array(sections.length).fill(false));
 
   return (
-    <div className="max-w-3xl mx-auto p-4 space-y-4">
-      <h1 className="text-2xl font-bold mb-4">Overall Strategy</h1>
-      {sections.map((section, index) => (
-        <div
-          key={index}
-          className="rounded-2xl shadow-md border bg-white dark:bg-gray-900 p-4"
+    <div className="space-y-4 w-full">
+      <h2 className="text-2xl font-bold mb-4">Overall Strategy</h2>
+
+      {/* Expand/Collapse buttons */}
+      <div className="flex gap-2 mb-4">
+        <button
+          onClick={expandAll}
+          className="px-3 py-1 rounded-md bg-green-600 hover:bg-green-700 text-sm"
         >
-          <button
-            className="flex justify-between items-center w-full text-left"
-            onClick={() => setOpenIndex(openIndex === index ? null : index)}
+          Expand All
+        </button>
+        <button
+          onClick={collapseAll}
+          className="px-3 py-1 rounded-md bg-red-600 hover:bg-red-700 text-sm"
+        >
+          Collapse All
+        </button>
+      </div>
+
+      {/* Accordion sections */}
+      {sections.map((section, index) => {
+        const isOpen = openStates[index];
+        return (
+          <div
+            key={index}
+            className="rounded-2xl shadow-md border bg-white/90 dark:bg-gray-900 w-full"
           >
-            <span className="font-semibold text-lg">{section.title}</span>
-            {openIndex === index ? <ChevronDown /> : <ChevronRight />}
-          </button>
-          {openIndex === index && (
-            <p className="mt-3 whitespace-pre-line text-gray-700 dark:text-gray-300">
-              {section.content}
-            </p>
-          )}
-        </div>
-      ))}
+            <button
+              className={`flex justify-between items-center w-full text-left px-4 py-3 transition-colors duration-200 ${
+                isOpen ? "bg-gray-200 dark:bg-gray-800" : ""
+              }`}
+              onClick={() => toggleSection(index)}
+              aria-expanded={isOpen}
+              aria-controls={`section-${index}`}
+            >
+              <span className="font-semibold text-lg text-black dark:text-white">
+                {section.title}
+              </span>
+              {isOpen ? <ChevronDown /> : <ChevronRight />}
+            </button>
+
+            <div
+              id={`section-${index}`}
+              className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
+              }`}
+            >
+              <div className="px-4 pb-4 border-t border-gray-300 dark:border-gray-700">
+                <p className="mt-3 whitespace-pre-line text-gray-800 dark:text-gray-300">
+                  {section.content}
+                </p>
+              </div>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }
