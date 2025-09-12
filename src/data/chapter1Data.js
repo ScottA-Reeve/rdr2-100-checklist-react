@@ -1,107 +1,105 @@
 // src/data/chapter1Data.js
 
-const chapter1Data = [
-  {
-    id: "c1-1",
-    type: "Story",
-    name: "Outlaws from the West",
-    location: "Colter, Ambarino",
-    icon: "",
-    notes: [
-      "Gold Medal: Take no damage during the shootout",
-      "Loot 6 or more items",
-      "Complete within 15 minutes 30 seconds",
-      "Tip: Use cover carefully, very forgiving intro mission",
-    ],
-  },
-  {
-    id: "c1-2",
-    type: "Story",
-    name: "Enter, Pursued by a Memory",
-    location: "Colter, Ambarino",
-    icon: "",
-    notes: [
-      "Gold Medal: Kill all wolves without taking damage",
-      "Maintain at least 80% accuracy",
-      "Complete within 6 minutes 30 seconds",
-      "Tip: Save Dead Eye for wolves",
-    ],
-  },
-  {
-    id: "c1-3",
-    type: "Story",
-    name: "The Aftermath of Genesis",
-    location: "Colter, Ambarino",
-    icon: "P",
-    notes: [
-      "Gold Medal: Kill each deer with one arrow",
-      "Don’t spook either deer",
-      "Ensure clean kills",
-      "Tip: Dead Eye makes this easier if unlocked",
-    ],
-  },
-  {
-    id: "c1-3a",
-    type: "Challenge",
-    name: "Master Hunter 1",
-    location: "Colter, Ambarino",
-    icon: "",
-    notes: [
-      "Unlocked automatically after The Aftermath of Genesis",
-      "Requirement: Skin 3 deer total (1 already counted here)",
-    ],
-  },
-  {
-    id: "c1-4",
-    type: "Story",
-    name: "Old Friends",
-    location: "Colter, Ambarino",
-    icon: "B",
-    notes: [
-      "Gold Medal: Kill all O’Driscolls with headshots",
-      "Complete within 15 minutes 30 seconds",
-      "Do not use health items",
-      "Unlocks Dead Eye",
-    ],
-  },
-  {
-    id: "c1-5",
-    type: "Story",
-    name: "Who the Hell is Leviticus Cornwall?",
-    location: "Colter, Ambarino",
-    icon: "",
-    notes: [
-      "Gold Medal: Save Lenny when he is hanging",
-      "Get 6 headshots",
-      "Complete within 10 minutes 30 seconds",
-      "Do not use health items",
-      "Tip: Aggressive playstyle recommended",
-    ],
-  },
-  {
-    id: "c1-5a",
-    type: "Challenge",
-    name: "Weapons Expert 1",
-    location: "Railway Track, Ambarino",
-    icon: "",
-    notes: [
-      "Requirement: Kill 3 enemies with a knife",
-      "Tip: During mission, don’t let Lenny kill the 2nd guard — stab him instead",
-    ],
-  },
-  {
-    id: "c1-6",
-    type: "Story",
-    name: "Eastward Bound",
-    location: "Colter, Ambarino",
-    icon: "",
-    notes: [
-      "Gold Medal: Pick up Javier when prompted",
-      "Complete within 11 minutes",
-      "Do not use health items",
-      "Tip: This mission transitions you to Chapter 2",
-    ],
-  },
-];
+const chapter1Data = {
+  introText: [
+    `Chapter 1 is fairly limited. Most of the missions auto-start, and the weather won't allow you to leave camp on your own in free-roam - your horse will collapse and die rapidly in the cold.`,
+    `However, there are a couple of challenges to look out for within the missions. There's a slight choice you have to make on the order of the missions here, which doesn't materially affect your quest for 100%, but does influence the ease of getting gold.`,
+    `The mission "Old Friends" unlocks the use of Dead Eye, and you can do this before "The Aftermath of Genesis" if you prefer as Dead Eye will make it slightly easier to get a clean kill on the deer. However, in terms of chronology and story authenticity, it feels to me more likely Arthur would go out in search of food first, hence the chosen order below.`,
+  ],
+
+  outroText: [
+    `You will also get the first of 6 gangs automatically added, some weapons, equipment and animals to the compendium however you play. Other than that, this is very much a case of enjoying some introductory missions.`,
+  ],
+
+  activities: [
+    {
+      type: "Story Mission",
+      name: "Outlaws from the West",
+      location: "Colter",
+      icon: "A",
+      notes: "This is the introduction mission, cannot be missed.",
+      tips: [
+        "Take no damage during the shootout",
+        "Loot 6 or more items",
+        "Clear the barn fight quickly",
+      ],
+      link: "https://www.ign.com/wikis/red-dead-redemption-2/Outlaws_from_the_West",
+    },
+    {
+      type: "Story Mission",
+      name: "Enter, Pursued by a Memory",
+      location: "Colter",
+      icon: "J",
+      notes: "Introduces horse mechanics.",
+      tips: [
+        "Kill all wolves without taking damage",
+        "Return to camp within 1 minute 30 seconds",
+      ],
+      link: "https://www.ign.com/wikis/red-dead-redemption-2/Enter,_Pursued_by_a_Memory",
+    },
+    {
+      type: "Story Mission",
+      name: "The Aftermath of Genesis",
+      location: "Colter",
+      icon: "C",
+      notes: "Learn hunting basics, hunt deer.",
+      tips: [
+        "Kill each deer with a clean shot",
+        "Kill 2 deer with one use of Dead Eye",
+      ],
+      link: "https://www.ign.com/wikis/red-dead-redemption-2/The_Aftermath_of_Genesis",
+    },
+    {
+      type: "Master Hunter 1",
+      name: "Skin 1/3 Deer",
+      location: "Colter",
+      icon: "",
+      notes: "Challenge started automatically at the end of this mission",
+    },
+    {
+      type: "Story Mission",
+      name: "Old Friends",
+      location: "Colter",
+      icon: "M",
+      notes: "First big shootout.",
+      tips: [
+        "Catch and hogtie Kieran within 45 seconds",
+        "Kill 3 O’Driscolls with a single Dead Eye use",
+        "Complete the mission with at least 80% accuracy",
+      ],
+      link: "https://www.ign.com/wikis/red-dead-redemption-2/Old_Friends",
+    },
+    {
+      type: "Story Mission",
+      name: "Who the Hell is Leviticus Cornwall?",
+      location: "Colter",
+      icon: "D",
+      notes: "Train robbery tutorial.",
+      tips: [
+        "Save Lenny when he hangs from the train",
+        "Get 10 headshots",
+        "Complete the mission without taking any health items",
+      ],
+      link: "https://www.ign.com/wikis/red-dead-redemption-2/Who_the_Hell_is_Leviticus_Cornwall%3F",
+    },
+    {
+      type: "Weapons Expert 1",
+      name: "Kill 1/3 Enemies with a Knife",
+      location: "Railway Track, Ambarino",
+      icon: "",
+      notes:
+        "During the mission, don't send Lenny to kill the second guard on the train, run up and stab him",
+    },
+    {
+      type: "Story Mission",
+      name: "Eastward Bound",
+      location: "Colter",
+      icon: "D",
+      notes: "Leads you out of the snowy mountains.",
+      tips: ["Complete within 6 minutes"],
+      link: "https://www.ign.com/wikis/red-dead-redemption-2/Eastward_Bound",
+    },
+  ],
+};
 
 export default chapter1Data;

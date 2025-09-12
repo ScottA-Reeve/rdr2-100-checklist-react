@@ -2,18 +2,18 @@ import React from "react";
 
 function IntroSection() {
   return (
-    <section className="max-w-4xl bg-black/70 p-6 md:p-10 rounded-xl shadow-lg space-y-6">
+    <section className="w-full space-y-6 text-gray-200 leading-relaxed">
       <h2 className="text-3xl md:text-4xl font-bold font-[Cinzel] text-center mb-6">
         Introduction & Table of Contents
       </h2>
 
-      <p className="text-lg leading-relaxed">
+      <p className="text-lg">
         The purpose of this guide is to provide a clear, efficient strategy to
         achieve <span className="font-bold">100% completion</span> in{" "}
         <em>Red Dead Redemption 2</em>.
       </p>
 
-      <p className="text-lg leading-relaxed">
+      <p className="text-lg">
         Unlike many walkthroughs, this guide focuses on the{" "}
         <span className="font-bold">optimal order of completion</span>. Without
         a plan, chasing the <em>Best in the West</em> Achievement/Trophy can
@@ -24,16 +24,14 @@ function IntroSection() {
         than in free roam.
       </p>
 
-      <p className="text-lg leading-relaxed">
+      <p className="text-lg">
         Make no mistake: compared to earlier Rockstar titles like{" "}
         <em>GTA IV</em>, <em>EFLC</em>, <em>RDR1</em>, or <em>GTA V</em>,
         achieving 100% here is a far greater challenge.
       </p>
 
-      <p className="text-lg leading-relaxed">
-        This guide also provides:
-      </p>
-      <ul className="list-disc list-inside space-y-1 text-lg leading-relaxed">
+      <p className="text-lg">This guide also provides:</p>
+      <ul className="list-disc list-inside space-y-1 text-lg">
         <li>Gold Medal objectives for missions</li>
         <li>Tips and notes to make progress smoother</li>
         <li>
@@ -46,12 +44,12 @@ function IntroSection() {
         </li>
       </ul>
 
-      <p className="text-lg leading-relaxed">
+      <p className="text-lg">
         While we’ll focus only on tasks required for 100%, we’ll also suggest
         optional side activities that make the main quest easier.
       </p>
 
-      <p className="text-lg leading-relaxed italic">
+      <p className="text-lg italic">
         ⚠️ <span className="font-bold">Spoiler Warning:</span> Some spoilers are
         unavoidable when discussing 100% completion. Read on at your own risk if
         you’re new to the story.
@@ -61,7 +59,7 @@ function IntroSection() {
         <h3 className="text-2xl font-semibold font-[Cinzel] mb-4">
           📑 Table of Contents
         </h3>
-        <ul className="list-disc list-inside space-y-2 text-lg leading-relaxed">
+        <ul className="list-disc list-inside space-y-2 text-lg">
           <li>
             <a href="#overall-strategy" className="hover:underline">
               I) Overall Strategy
@@ -69,42 +67,42 @@ function IntroSection() {
           </li>
           <li>
             <a href="#chapter-1" className="hover:underline">
-             II) Chapter 1
+              II) Chapter 1
             </a>
           </li>
           <li>
             <a href="#chapter-2" className="hover:underline">
-             III) Chapter 2
+              III) Chapter 2
             </a>
           </li>
           <li>
             <a href="#chapter-3" className="hover:underline">
-             IV) Chapter 3
+              IV) Chapter 3
             </a>
           </li>
           <li>
             <a href="#chapter-4" className="hover:underline">
-             V) Chapter 4
+              V) Chapter 4
             </a>
           </li>
           <li>
             <a href="#chapter-5" className="hover:underline">
-             VI) Chapter 5
+              VI) Chapter 5
             </a>
           </li>
           <li>
             <a href="#chapter-6" className="hover:underline">
-             VII) Chapter 6
+              VII) Chapter 6
             </a>
           </li>
           <li>
             <a href="#epilogues" className="hover:underline">
-             VIII) Epilogues Part 1 &amp; 2
+              VIII) Epilogues Part 1 &amp; 2
             </a>
           </li>
           <li>
             <a href="#summary" className="hover:underline">
-             IX) Summary &amp; Acknowledgements
+              IX) Summary &amp; Acknowledgements
             </a>
           </li>
         </ul>
@@ -115,7 +113,7 @@ function IntroSection() {
         </p>
       </div>
 
-      <p className="text-lg leading-relaxed">
+      <p className="text-lg">
         If you’re planning to follow this guide, I strongly recommend reading
         this introduction. It explains the{" "}
         <span className="font-bold">logic behind the approach</span>, ensuring

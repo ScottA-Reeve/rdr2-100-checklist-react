@@ -1,108 +1,66 @@
-// src/components/ChapterChecklist.jsx
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
-/**
- * ChapterChecklist
- * Props:
- *  - title: string (used for display + storage key)
- *  - activities: array of objects (each object may contain keys like:
- *      activity, name, location, mapIcon, notes, id
- *    notes may be a string or an array of strings)
- */
-export default function ChapterChecklist({ title = "Chapter", activities = [] }) {
-  // storage key derived from title (safe)
-  const storageKey = `rdr2_check_${(title || "chapter").replace(/\s+/g, "_").toLowerCase()}_checked`;
+export default function ChapterChecklist({
+  title,
+  activities,
+  checked,
+  onToggle,
+  onCheckAll,
+  onUncheckAll,
+  introText = [],
+  outroText = [],
+}) {
+  const [expandedRows, setExpandedRows] = useState({});
 
-  // initialize checked state from localStorage if possible, otherwise false array
-  const [checked, setChecked] = useState(() => {
-    try {
-      const raw = localStorage.getItem(storageKey);
-      if (raw) {
-        const parsed = JSON.parse(raw);
-        if (Array.isArray(parsed)) {
-          // normalize length to activities.length
-          if (parsed.length === activities.length) return parsed;
-          if (parsed.length < activities.length) return [...parsed, ...Array(activities.length - parsed.length).fill(false)];
-          return parsed.slice(0, activities.length);
-        }
-      }
-    } catch (e) {
-      // ignore parse errors
-      // eslint-disable-next-line no-console
-      console.warn("Failed to load saved progress:", e);
-    }
-    return Array(activities.length).fill(false);
-  });
-
-  // if activities length changes after mount, adjust checked array to match
-  useEffect(() => {
-    setChecked((prev) => {
-      if (!Array.isArray(prev)) return Array(activities.length).fill(false);
-      if (prev.length === activities.length) return prev;
-      if (prev.length < activities.length) return [...prev, ...Array(activities.length - prev.length).fill(false)];
-      return prev.slice(0, activities.length);
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activities.length]);
-
-  // persist to localStorage whenever checked changes
-  useEffect(() => {
-    try {
-      localStorage.setItem(storageKey, JSON.stringify(checked));
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.warn("Failed to save progress:", e);
-    }
-  }, [checked, storageKey]);
-
-  // helpers
-  const toggleCheck = (index) => {
-    setChecked((prev) => {
-      const next = [...prev];
-      next[index] = !next[index];
-      return next;
-    });
+  const toggleTips = (idx) => {
+    setExpandedRows((prev) => ({
+      ...prev,
+      [idx]: !prev[idx],
+    }));
   };
-
-  const checkAll = () => setChecked(Array(activities.length).fill(true));
-  const uncheckAll = () => setChecked(Array(activities.length).fill(false));
 
   const completed = checked.filter(Boolean).length;
   const total = activities.length;
   const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
 
-  // safe field getter: try several likely keys and fallback to '-'
   const getField = (item, ...keys) => {
     for (const k of keys) {
-      if (item && Object.prototype.hasOwnProperty.call(item, k) && item[k] !== null && item[k] !== undefined) {
-        return item[k];
+      if (item && Object.prototype.hasOwnProperty.call(item, k)) {
+        return item[k] ?? "-";
       }
     }
     return "-";
   };
 
   return (
-    <section className="w-full bg-black/70 p-6 rounded-2xl shadow-md">
-      <div className="flex items-start justify-between mb-4">
+    <section className="w-full bg-black/70 p-6 rounded-2xl shadow-md space-y-6">
+      {/* Intro */}
+      {introText.length > 0 && (
+        <div className="text-gray-200 leading-relaxed space-y-4">
+          {introText.map((p, i) => (
+            <p key={i}>{p}</p>
+          ))}
+        </div>
+      )}
+
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h2 className="text-2xl font-bold">{title}</h2>
           <p className="text-sm text-gray-300 mt-1">
             {completed}/{total} completed ({percent}%)
           </p>
         </div>
-
-        <div className="flex items-center gap-2">
+        <div className="flex gap-2">
           <button
-            onClick={checkAll}
-            className="px-3 py-1 rounded-md bg-green-600 hover:bg-green-700 text-white text-sm"
-            type="button"
+            onClick={onCheckAll}
+            className="px-3 py-1 bg-green-700 hover:bg-green-600 text-sm rounded-md"
           >
             Check All
           </button>
           <button
-            onClick={uncheckAll}
-            className="px-3 py-1 rounded-md bg-red-600 hover:bg-red-700 text-white text-sm"
-            type="button"
+            onClick={onUncheckAll}
+            className="px-3 py-1 bg-red-700 hover:bg-red-600 text-sm rounded-md"
           >
             Uncheck All
           </button>
@@ -124,58 +82,129 @@ export default function ChapterChecklist({ title = "Chapter", activities = [] })
 
       {/* Table */}
       <div className="overflow-x-auto">
-        <table className="w-full border-collapse rounded-md overflow-hidden">
+        <table className="w-full border border-gray-600 rounded-md overflow-hidden">
           <thead>
             <tr className="bg-yellow-700 text-black">
-              <th className="px-4 py-2 text-left">✔</th>
-              <th className="px-4 py-2 text-left">Activity</th>
-              <th className="px-4 py-2 text-left">Name / Details</th>
-              <th className="px-4 py-2 text-left">Location</th>
-              <th className="px-4 py-2 text-left">Map Icon</th>
-              <th className="px-4 py-2 text-left">Notes</th>
+              <th className="px-4 py-2 border border-gray-600 text-left">✔</th>
+              <th className="px-4 py-2 border border-gray-600 text-left">
+                Activity
+              </th>
+              <th className="px-4 py-2 border border-gray-600 text-left">
+                Name / Details
+              </th>
+              <th className="px-4 py-2 border border-gray-600 text-left">
+                Location
+              </th>
+              <th className="px-4 py-2 border border-gray-600 text-left">
+                Map Icon
+              </th>
+              <th className="px-4 py-2 border border-gray-600 text-left">
+                Notes
+              </th>
             </tr>
           </thead>
-
           <tbody>
             {activities.map((item, idx) => {
-              const key = item && (item.id ?? item.name ?? idx);
-              const activityText = getField(item, "activity", "Activity", "type", "Type");
-              const nameText = getField(item, "name", "Name", "title", "Title");
-              const locationText = getField(item, "location", "Location");
-              const mapIconText = getField(item, "mapIcon", "MapIcon", "icon", "Icon", "map_icon");
+              const key = item.id ?? idx;
+              const isChecked = checked[idx] || false;
+              const hasTips = Array.isArray(item.tips) && item.tips.length > 0;
+              const isExpanded = expandedRows[idx] || false;
 
-              const notes = item && item.notes !== undefined && item.notes !== null ? item.notes : "-";
+              // Icon styling by type
+              let iconClasses = "";
+              if (item.type === "Story Mission" || item.type === "Story")
+                iconClasses = "bg-yellow-500 text-black";
+              else if (item.type === "Stranger Mission")
+                iconClasses = "bg-white text-black";
+              else if (
+                item.type === "Challenge" ||
+                item.type.includes("Expert") ||
+                item.type.includes("Hunter")
+              )
+                iconClasses = "bg-red-600 text-white";
 
               return (
                 <tr
                   key={key}
-                  className={`border-b border-gray-600 ${
-                    checked[idx] ? "bg-green-900/30" : "bg-black/10 hover:bg-black/20"
+                  className={`${
+                    isChecked
+                      ? "bg-green-900/30"
+                      : "bg-black/10 hover:bg-black/20"
                   }`}
                 >
-                  <td className="px-4 py-2 align-top">
+                  <td className="px-4 py-2 border border-gray-600 align-top">
                     <input
                       type="checkbox"
-                      checked={!!checked[idx]}
-                      onChange={() => toggleCheck(idx)}
+                      checked={isChecked}
+                      onChange={() => onToggle(idx)}
                       className="h-4 w-4 accent-yellow-600"
                     />
                   </td>
-
-                  <td className="px-4 py-2 align-top font-medium">{activityText}</td>
-                  <td className="px-4 py-2 align-top">{nameText}</td>
-                  <td className="px-4 py-2 align-top">{locationText}</td>
-                  <td className="px-4 py-2 align-top">{mapIconText}</td>
-
-                  <td className="px-4 py-2 align-top text-sm text-gray-200">
-                    {Array.isArray(notes) ? (
+                  <td className="px-4 py-2 border border-gray-600 align-top">
+                    {getField(item, "type")}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-600 align-top">
+                    {getField(item, "name", "title")}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-600 align-top">
+                    {getField(item, "location")}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-600 align-top">
+                    {item.icon && (
+                      <span
+                        className={`inline-flex items-center justify-center h-7 w-7 rounded-full font-bold ${iconClasses}`}
+                      >
+                        {item.icon}
+                      </span>
+                    )}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-600 align-top text-sm text-gray-200">
+                    {/* Notes */}
+                    {Array.isArray(item.notes) ? (
                       <ul className="list-disc list-inside space-y-1">
-                        {notes.map((n, i) => (
+                        {item.notes.map((n, i) => (
                           <li key={i}>{n}</li>
                         ))}
                       </ul>
                     ) : (
-                      <p className="whitespace-pre-line">{String(notes)}</p>
+                      <p>{String(item.notes || "-")}</p>
+                    )}
+
+                    {/* Tips toggle */}
+                    {hasTips && (
+                      <div className="mt-2">
+                        <button
+                          onClick={() => toggleTips(idx)}
+                          className="text-xs text-yellow-400 hover:underline"
+                        >
+                          {isExpanded ? "Hide Tips" : "Show Gold Medal Tips"}
+                        </button>
+
+                        {isExpanded && (
+                          <div className="mt-2 p-2 bg-black/40 rounded-md border border-yellow-600">
+                            <h4 className="font-semibold text-yellow-400 mb-1">
+                              Gold Medal Tips
+                            </h4>
+                            <ul className="list-disc list-inside space-y-1 text-gray-300">
+                              {item.tips.map((tip, i) => (
+                                <li key={i}>{tip}</li>
+                              ))}
+                            </ul>
+                            {item.link && (
+                              <p className="mt-2">
+                                <a
+                                  href={item.link}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-blue-400 hover:underline text-sm"
+                                >
+                                  View Full IGN Walkthrough
+                                </a>
+                              </p>
+                            )}
+                          </div>
+                        )}
+                      </div>
                     )}
                   </td>
                 </tr>
@@ -184,6 +213,15 @@ export default function ChapterChecklist({ title = "Chapter", activities = [] })
           </tbody>
         </table>
       </div>
+
+      {/* Outro */}
+      {outroText.length > 0 && (
+        <div className="text-gray-200 leading-relaxed space-y-4">
+          {outroText.map((p, i) => (
+            <p key={i}>{p}</p>
+          ))}
+        </div>
+      )}
     </section>
   );
 }
