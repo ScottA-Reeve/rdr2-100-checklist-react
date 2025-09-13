@@ -39,30 +39,35 @@ import chapter4Part6 from "./data/chapter4/part6";
 // ✅ Chapter 5 import
 import chapter5Data from "./data/chapter5Data";
 
-// ✅ Chapter 6 placeholders
+// ✅ Chapter 6 imports
 import chapter6Part1 from "./data/chapter6/part1";
 import chapter6Part2 from "./data/chapter6/part2";
 import chapter6Part3 from "./data/chapter6/part3";
 import chapter6Part4 from "./data/chapter6/part4";
 import chapter6Part5 from "./data/chapter6/part5";
 
+// ✅ Epilogue imports
+import epiloguePart1 from "./data/epilogue/part1";
+import epiloguePart2 from "./data/epilogue/part2";
+import epiloguePart3 from "./data/epilogue/part3";
+import epiloguePart4 from "./data/epilogue/part4";
+import epiloguePart5 from "./data/epilogue/part5";
+
 function App() {
   const [progress, setProgress] = useState({});
 
-  // Helper to safely parse saved checked arrays and normalize length
   const loadCheckedArray = (key, total) => {
     try {
       const raw = localStorage.getItem(`rdr2_check_${key}_checked`);
       if (!raw) return new Array(total).fill(false);
       const arr = JSON.parse(raw);
       if (!Array.isArray(arr)) return new Array(total).fill(false);
-      // normalize length
       const result = new Array(total).fill(false);
       for (let i = 0; i < Math.min(arr.length, total); i++) {
         result[i] = !!arr[i];
       }
       return result;
-    } catch (e) {
+    } catch {
       return new Array(total).fill(false);
     }
   };
@@ -79,7 +84,7 @@ function App() {
       { key: "chapter2Part5", total: chapter2Part5.activities.length },
       { key: "chapter2Part6", total: chapter2Part6.activities.length },
       { key: "chapter2Part7", total: chapter2Part7.activities.length },
-      // ✅ Chapter 3
+      // Chapter 3
       { key: "chapter3Part1", total: chapter3Part1.activities.length },
       { key: "chapter3Part2", total: chapter3Part2.activities.length },
       { key: "chapter3Part3", total: chapter3Part3.activities.length },
@@ -89,21 +94,27 @@ function App() {
       { key: "chapter3Part7", total: chapter3Part7.activities.length },
       { key: "chapter3Part8", total: chapter3Part8.activities.length },
       { key: "chapter3Part9", total: chapter3Part9.activities.length },
-      // ✅ Chapter 4
+      // Chapter 4
       { key: "chapter4Part1", total: chapter4Part1.activities.length },
       { key: "chapter4Part2", total: chapter4Part2.activities.length },
       { key: "chapter4Part3", total: chapter4Part3.activities.length },
       { key: "chapter4Part4", total: chapter4Part4.activities.length },
       { key: "chapter4Part5", total: chapter4Part5.activities.length },
       { key: "chapter4Part6", total: chapter4Part6.activities.length },
-      // ✅ Chapter 5
+      // Chapter 5
       { key: "chapter5", total: chapter5Data.activities.length },
-      // ✅ Chapter 6
+      // Chapter 6
       { key: "chapter6Part1", total: chapter6Part1.activities.length },
       { key: "chapter6Part2", total: chapter6Part2.activities.length },
       { key: "chapter6Part3", total: chapter6Part3.activities.length },
       { key: "chapter6Part4", total: chapter6Part4.activities.length },
       { key: "chapter6Part5", total: chapter6Part5.activities.length },
+      // Epilogue
+      { key: "epiloguePart1", total: epiloguePart1.activities.length },
+      { key: "epiloguePart2", total: epiloguePart2.activities.length },
+      { key: "epiloguePart3", total: epiloguePart3.activities.length },
+      { key: "epiloguePart4", total: epiloguePart4.activities.length },
+      { key: "epiloguePart5", total: epiloguePart5.activities.length },
     ];
 
     chapters.forEach(({ key, total }) => {
@@ -113,18 +124,14 @@ function App() {
     setProgress(stored);
   }, []);
 
-  // Save progress whenever it changes
   useEffect(() => {
     try {
       Object.entries(progress).forEach(([key, checked]) => {
         localStorage.setItem(`rdr2_check_${key}_checked`, JSON.stringify(checked));
       });
-    } catch (e) {
-      // ignore storage errors
-    }
+    } catch {}
   }, [progress]);
 
-  // Toggle handler
   const handleToggle = (chapterKey, index) => {
     setProgress((prev) => {
       const updated = [...(prev[chapterKey] || [])];
@@ -136,7 +143,6 @@ function App() {
     });
   };
 
-  // Check all / Uncheck all
   const handleCheckAll = (chapterKey, total) => {
     setProgress((prev) => ({ ...prev, [chapterKey]: new Array(total).fill(true) }));
   };
@@ -204,7 +210,17 @@ function App() {
                   { key: "chapter6Part5", title: "Part V", total: chapter6Part5.activities.length, checked: progress.chapter6Part5 || [] },
                 ],
               },
-              { key: "epilogues", title: "Epilogues", total: 0, checked: [] },
+              {
+                key: "epilogue",
+                title: "Epilogue",
+                children: [
+                  { key: "epiloguePart1", title: "Part I", total: epiloguePart1.activities.length, checked: progress.epiloguePart1 || [] },
+                  { key: "epiloguePart2", title: "Part II", total: epiloguePart2.activities.length, checked: progress.epiloguePart2 || [] },
+                  { key: "epiloguePart3", title: "Part III", total: epiloguePart3.activities.length, checked: progress.epiloguePart3 || [] },
+                  { key: "epiloguePart4", title: "Part IV", total: epiloguePart4.activities.length, checked: progress.epiloguePart4 || [] },
+                  { key: "epiloguePart5", title: "Part V", total: epiloguePart5.activities.length, checked: progress.epiloguePart5 || [] },
+                ],
+              },
             ]}
           />
         </aside>
@@ -241,7 +257,7 @@ function App() {
             />
           </CollapsibleSection>
 
-          {/* Chapter 2 (all 7 parts) */}
+          {/* Chapter 2 */}
           <CollapsibleSection title="Chapter 2">
             {[chapter2Part1, chapter2Part2, chapter2Part3, chapter2Part4, chapter2Part5, chapter2Part6, chapter2Part7].map((data, i) => (
               <CollapsibleSection key={`chapter2Part${i + 1}`} title={`Part ${i + 1}`} defaultOpen={i === 0}>
@@ -290,7 +306,7 @@ function App() {
           </CollapsibleSection>
 
           {/* Chapter 5 */}
-          <CollapsibleSection title="Chapter 5" defaultOpen>
+          <CollapsibleSection title="Chapter 5">
             <ChapterChecklist
               title="Chapter 5"
               activities={chapter5Data}
@@ -319,9 +335,26 @@ function App() {
             ))}
           </CollapsibleSection>
 
-          {/* Epilogues */}
-          <CollapsibleSection title="Epilogues Part 1 & 2"><p>Placeholder for Epilogues guide content.</p></CollapsibleSection>
-          <CollapsibleSection title="Summary & Acknowledgements"><p>Placeholder for summary and acknowledgements.</p></CollapsibleSection>
+          {/* Epilogue */}
+          <CollapsibleSection title="Epilogue">
+            {[epiloguePart1, epiloguePart2, epiloguePart3, epiloguePart4, epiloguePart5].map((data, i) => (
+              <CollapsibleSection key={`epiloguePart${i + 1}`} title={`Part ${i + 1}`} defaultOpen={i === 0}>
+                <ChapterChecklist
+                  title={`Epilogue - Part ${i + 1}`}
+                  activities={data}
+                  checked={progress[`epiloguePart${i + 1}`] || []}
+                  onToggle={(index) => handleToggle(`epiloguePart${i + 1}`, index)}
+                  onCheckAll={() => handleCheckAll(`epiloguePart${i + 1}`, data.activities.length)}
+                  onUncheckAll={() => handleUncheckAll(`epiloguePart${i + 1}`, data.activities.length)}
+                />
+              </CollapsibleSection>
+            ))}
+          </CollapsibleSection>
+
+          {/* Summary */}
+          <CollapsibleSection title="Summary & Acknowledgements">
+            <p>Placeholder for summary and acknowledgements.</p>
+          </CollapsibleSection>
         </main>
       </div>
       <BackToTopButton />
