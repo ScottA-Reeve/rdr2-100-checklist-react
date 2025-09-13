@@ -28,6 +28,14 @@ import chapter3Part7 from "./data/chapter3/part7";
 import chapter3Part8 from "./data/chapter3/part8";
 import chapter3Part9 from "./data/chapter3/part9";
 
+// ✅ Chapter 4 imports
+import chapter4Part1 from "./data/chapter4/part1";
+import chapter4Part2 from "./data/chapter4/part2";
+import chapter4Part3 from "./data/chapter4/part3";
+import chapter4Part4 from "./data/chapter4/part4";
+import chapter4Part5 from "./data/chapter4/part5";
+import chapter4Part6 from "./data/chapter4/part6";
+
 function App() {
   const [progress, setProgress] = useState({});
 
@@ -71,6 +79,13 @@ function App() {
       { key: "chapter3Part7", total: chapter3Part7.activities.length },
       { key: "chapter3Part8", total: chapter3Part8.activities.length },
       { key: "chapter3Part9", total: chapter3Part9.activities.length },
+      // ✅ Chapter 4
+      { key: "chapter4Part1", total: chapter4Part1.activities.length },
+      { key: "chapter4Part2", total: chapter4Part2.activities.length },
+      { key: "chapter4Part3", total: chapter4Part3.activities.length },
+      { key: "chapter4Part4", total: chapter4Part4.activities.length },
+      { key: "chapter4Part5", total: chapter4Part5.activities.length },
+      { key: "chapter4Part6", total: chapter4Part6.activities.length },
     ];
 
     chapters.forEach(({ key, total }) => {
@@ -153,7 +168,18 @@ function App() {
                   { key: "chapter3Part9", title: "Part IX", total: chapter3Part9.activities.length, checked: progress.chapter3Part9 || [] },
                 ],
               },
-              { key: "chapter4", title: "Chapter 4", total: 0, checked: [] },
+              {
+                key: "chapter4",
+                title: "Chapter 4",
+                children: [
+                  { key: "chapter4Part1", title: "Part I", total: chapter4Part1.activities.length, checked: progress.chapter4Part1 || [] },
+                  { key: "chapter4Part2", title: "Part II", total: chapter4Part2.activities.length, checked: progress.chapter4Part2 || [] },
+                  { key: "chapter4Part3", title: "Part III", total: chapter4Part3.activities.length, checked: progress.chapter4Part3 || [] },
+                  { key: "chapter4Part4", title: "Part IV", total: chapter4Part4.activities.length, checked: progress.chapter4Part4 || [] },
+                  { key: "chapter4Part5", title: "Part V", total: chapter4Part5.activities.length, checked: progress.chapter4Part5 || [] },
+                  { key: "chapter4Part6", title: "Part VI", total: chapter4Part6.activities.length, checked: progress.chapter4Part6 || [] },
+                ],
+              },
               { key: "chapter5", title: "Chapter 5", total: 0, checked: [] },
               { key: "chapter6", title: "Chapter 6", total: 0, checked: [] },
               { key: "epilogues", title: "Epilogues", total: 0, checked: [] },
@@ -293,8 +319,30 @@ function App() {
             ))}
           </CollapsibleSection>
 
+          {/* ✅ Chapter 4 (6 parts) */}
+          <CollapsibleSection title="Chapter 4">
+            {[
+              { part: "I", data: chapter4Part1, key: "chapter4Part1" },
+              { part: "II", data: chapter4Part2, key: "chapter4Part2" },
+              { part: "III", data: chapter4Part3, key: "chapter4Part3" },
+              { part: "IV", data: chapter4Part4, key: "chapter4Part4" },
+              { part: "V", data: chapter4Part5, key: "chapter4Part5" },
+              { part: "VI", data: chapter4Part6, key: "chapter4Part6" },
+            ].map(({ part, data, key }, i) => (
+              <CollapsibleSection key={key} title={`Part ${part}`} defaultOpen={i === 0}>
+                <ChapterChecklist
+                  title={`Chapter 4 - Part ${part}`}
+                  activities={data}
+                  checked={progress[key] || []}
+                  onToggle={(index) => handleToggle(key, index)}
+                  onCheckAll={() => handleCheckAll(key, data.activities.length)}
+                  onUncheckAll={() => handleUncheckAll(key, data.activities.length)}
+                />
+              </CollapsibleSection>
+            ))}
+          </CollapsibleSection>
+
           {/* Other chapters */}
-          <CollapsibleSection title="Chapter 4"><p>Placeholder for Chapter 4 guide content.</p></CollapsibleSection>
           <CollapsibleSection title="Chapter 5"><p>Placeholder for Chapter 5 guide content.</p></CollapsibleSection>
           <CollapsibleSection title="Chapter 6"><p>Placeholder for Chapter 6 guide content.</p></CollapsibleSection>
           <CollapsibleSection title="Epilogues Part 1 & 2"><p>Placeholder for Epilogues guide content.</p></CollapsibleSection>
