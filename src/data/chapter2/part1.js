@@ -1,125 +1,146 @@
-// src/data/chapter2/part1.js
 const chapter2Part1 = {
   introText: [
-    "Don’t jump into the story missions straight away! There are some easy challenges close by — completing these early will save you time later when camp moves.",
-    "Your first goals: finish skinning deer, shoot some birds, and gather Yarrow herbs east of camp. You’ll also unlock the Dinosaur Bones quest nearby.",
-    "Although not required for 100%, picking up the Limpany gold bar is an easy $500 and helps with early purchases like the Varmint Rifle."
+    "Don’t rush into story missions right away! There are easy challenges nearby worth completing before camp moves later in the chapter, saving travel time."
   ],
   activities: [
     {
-      id: 1,
       type: "Challenge",
-      name: "Master Hunter 1 — Skin 3/3 deer",
+      name: "Master Hunter 1 — Skin 3 Deer",
       location: "Twin Stack Pass, New Hanover",
-      icon: "H",
-      notes: ["You already skinned 1 in Chapter 1. Two more can be found east of Horseshoe Overlook."]
+      icon: "",
+      notes: [
+        "Skin two more deer here (one was done in Chapter 1).",
+        "Plenty of deer spawn east of Horseshoe Overlook."
+      ]
     },
     {
-      id: 2,
       type: "Challenge",
-      name: "Sharpshooter 1 — Kill 3 flying birds",
+      name: "Sharpshooter 1 — Kill 3 Flying Birds",
       location: "Twin Stack Pass, New Hanover",
-      icon: "H",
-      notes: ["Shoot any flying bird. Easy to complete while hunting deer."]
+      icon: "",
+      notes: ["Shoot any birds in flight to complete this challenge."]
     },
     {
-      id: 3,
       type: "Challenge",
       name: "Herbalist 1 — Pick 6 Yarrow",
       location: "Twin Stack Pass, New Hanover",
-      icon: "H",
-      notes: ["Discard Hosea’s starter herbs if needed. Clumps of 3 grow in the area."]
+      icon: "",
+      notes: [
+        "Easy to find clumps of Yarrow east of camp.",
+        "Pick 3 to start, and another 3 near the 'Test of Faith' stranger."
+      ]
     },
     {
-      id: 4,
       type: "Stranger Mission",
-      name: "A Test of Faith — Dinosaur Bones",
+      name: "A Test of Faith",
       location: "The Heartlands, New Hanover",
       icon: "?",
-      notes: ["Deborah MacGuiness gives you the quest. More Yarrow grows right next to her wagon."]
+      notes: ["Deborah MacGuiness introduces the Dinosaur Bones quest."],
+      link: "https://www.ign.com/wikis/red-dead-redemption-2/A_Test_of_Faith"
     },
     {
-      id: 5,
+      type: "Challenge",
+      name: "Herbalist 2 — Pick & Eat Raspberry",
+      location: "The Heartlands, New Hanover",
+      icon: "",
+      notes: ["Eat the berry after picking to progress Herbalist 2."]
+    },
+    {
       type: "Optional",
       name: "Loot Gold Bar",
       location: "Limpany, New Hanover",
-      icon: "-",
-      notes: ["Inside the Sheriff’s office box. Worth $500 at a fence."]
+      icon: "",
+      notes: [
+        "Burnt-out sheriff’s office holds a gold bar worth $500 at a Fence.",
+        "Excellent early money boost."
+      ]
     },
     {
-      id: 6,
+      type: "Stranger Mission",
+      name: "All That Glitters (Jack Hall Gang Map 1)",
+      location: "NW of Flatneck Station, New Hanover",
+      icon: "?",
+      notes: ["Purchase the first Jack Hall Gang Treasure Map."],
+      link: "https://www.ign.com/wikis/red-dead-redemption-2/All_That_Glitters"
+    },
+    {
       type: "Story Mission",
       name: "Who is Not Without Sin",
       location: "Flatneck Station, New Hanover",
       icon: "RS",
-      notes: ["Meet Reverend Swanson. Play poker here to progress Gambler Challenge 1."],
-      tips: [
-        "Win 5 poker hands without folding — likely scripted to guarantee wins.",
-        "Gold Medal: Finish within 2 minutes, win without losing a hand."
+      notes: [
+        "Find Reverend Swanson and complete the mission.",
+        "Also chance to progress Gambler 1, by winning 5 hands of Poker",
       ],
-      link: "https://www.ign.com/wikis/red-dead-redemption-2/Who_is_Not_Without_Sin"
+      tips: [
+        "Win 2 hands of Poker.",
+        "Return Reverend Swanson to camp within 2 minutes 5 seconds.",
+      ],
+      link: "https://www.ign.com/wikis/red-dead-redemption-2/Who_Is_Not_Without_Sin"
     },
     {
-      id: 7,
       type: "Stranger Mission",
       name: "Smoking and Other Hobbies",
       location: "Flatneck Station, New Hanover",
       icon: "?",
-      notes: ["Unlocks cigarette cards collection."]
+      notes: ["Unlocks the Cigarette Cards quest."],
+      link: "https://www.ign.com/wikis/red-dead-redemption-2/Smoking_and_Other_Hobbies"
     },
     {
-      id: 8,
-      type: "Stranger Mission",
-      name: "All That Glitters — Jack Hall Treasure",
-      location: "NW of Flatneck Station, New Hanover",
-      icon: "?",
-      notes: ["Buy the first Jack Hall Gang treasure map from a stranger. Unlocks Explorer Challenge 1."]
+      type: "Optional",
+      name: "Point of Interest — Trading Post",
+      location: "SE of Flatneck Station, New Hanover",
+      icon: "",
+      notes: ["Optional point of interest to observe."]
     },
     {
-      id: 9,
-      type: "Explorer Challenge",
-      name: "Jack Hall Treasure Map 1",
-      location: "Caliban’s Seat, New Hanover",
-      icon: "H",
-      notes: ["Completes Explorer Challenge 1."]
-    },
-    {
-      id: 10,
       type: "Optional",
       name: "Sell Gold Bar",
-      location: "Fence, North of Rhodes",
-      icon: "-",
-      notes: ["Boosts finances early. Buy the Varmint Rifle while here."]
+      location: "Fence, Rhodes, New Hanover",
+      icon: "",
+      notes: ["Sell the Limpany gold bar here for a $500 boost."]
     },
     {
-      id: 11,
-      type: "Gambler Challenge",
-      name: "Blackjack — Double Down Wins (5)",
-      location: "Rhodes Saloon, New Hanover",
-      icon: "H",
-      notes: ["Keep doubling down until you’ve won 5 times."],
+      type: "Optional",
+      name: "Buy Pamphlets",
+      location: "Rhodes Fence",
+      icon: "",
+      notes: [
+        "Pick up the Poisoned Arrow and Homing Tomahawk pamphlets for future survivalist challenges."
+      ]
     },
     {
-      id: 12,
+      type: "Challenge",
+      name: "Gambler 2 — Blackjack Double Down Wins",
+      location: "Rhodes Saloon",
+      icon: "",
+      notes: [
+        "Win 5 Blackjack hands by doubling down.",
+        "Keep playing until you get all 5 wins."
+      ]
+    },
+    {
       type: "Weapons",
       name: "Buy Varmint Rifle",
-      location: "Gun Store, Rhodes",
-      icon: "H",
-      notes: ["Essential for hunting small animals. Don’t rob the basement yet — that’s used for a Bandit Challenge later."]
+      location: "Rhodes Gunsmith",
+      icon: "",
+      notes: [
+        "Essential for hunting small animals.",
+        "Avoid robbing the basement now — needed later for Bandit Challenge 3."
+      ]
     },
     {
-      id: 13,
-      type: "Explorer Challenge",
-      name: "Jack Hall Treasure Map 2",
-      location: "Caliban’s Seat, New Hanover",
-      icon: "H",
-      notes: ["Follow the first treasure clue to collect the second map."]
+      type: "Challenge",
+      name: "Explorer 2 — Jack Hall Gang Treasure Map 2",
+      location: "Caliban's Seat, New Hanover",
+      icon: "",
+      notes: ["Continue the treasure trail with the second map."]
     }
   ],
   outroText: [
-    "By the end of Part I, you’ll have several challenges started or completed, early money from the Limpany gold bar, and key equipment like the Varmint Rifle.",
-    "You’re also set up with multiple Stranger missions and treasure maps that will carry forward through Chapter 2."
+    "By the end of Part I, you’ll have boosted your cash, unlocked multiple challenge lines, and set yourself up for efficient progress later in the chapter."
   ]
 };
 
 export default chapter2Part1;
+

@@ -1,116 +1,123 @@
-// src/data/chapter2/part2.js
-
 const chapter2Part2 = {
   introText: [
-    "In Part II, we move deeper into Valentine and beyond. You’ll start Uncle’s mission, meet new Strangers, and take on your first bounties. This part also unlocks multiple challenges, a Legendary Animal hunt, and treasure map progression.",
+    "Part II takes you through Valentine, introduces new Stranger and Bounty missions, and begins key storylines. This is where challenges and story start blending closely."
   ],
   activities: [
     {
       type: "Story Mission",
       name: "Polite Society, Valentine Style",
-      location: "Horseshoe Overlook / Valentine, The Heartlands, New Hanover",
+      location: "Horseshoe Overlook",
       icon: "U",
-      notes: "Start this story mission with Uncle. Leads you into Valentine.",
+      notes: ["Uncle drags you into Valentine."],
       tips: [
-        "Return the lost wagon horse to its owner",
-        "Find Karen within 45 seconds"
+        "Return Karen to the hotel within 45 seconds.",
+        "Catch Lenny in the saloon within 45 seconds."
       ],
       link: "https://www.ign.com/wikis/red-dead-redemption-2/Polite_Society,_Valentine_Style"
     },
     {
       type: "Stranger Mission",
       name: "The Noblest of Men, and a Woman",
-      location: "Valentine, New Hanover",
+      location: "Valentine Saloon (East)",
       icon: "?",
-      notes: "Meet the Stranger in the smaller Saloon to the east of town.",
-      link: "https://www.ign.com/wikis/red-dead-redemption-2/The_Noblest_of_Men_and_Women"
+      notes: ["Meet Theodore Levin to start the gunslinger quests."],
+      link: "https://www.ign.com/wikis/red-dead-redemption-2/The_Noblest_of_Men,_and_a_Woman"
     },
     {
       type: "Bounty",
       name: "Good, Honest, Snake Oil",
-      location: "Valentine, New Hanover",
+      location: "Valentine Sheriff’s Office",
       icon: "Bounty",
-      notes: "Unlocks further bounties. Picked up from the Sheriff’s Office.",
-      link: "https://www.ign.com/wikis/red-dead-redemption-2/Bounties"
+      notes: ["First bounty mission, unlocks further bounties."],
+      tips: [
+        "Capture Benedict Allbright alive.",
+        "Return him within 1 minute 30 seconds.",
+        "Do not fall into the river while chasing him."
+      ],
+      link: "https://www.ign.com/wikis/red-dead-redemption-2/Good,_Honest,_Snake_Oil"
     },
     {
       type: "Story Mission",
       name: "Americans at Rest",
       location: "Valentine, New Hanover",
       icon: "JE",
-      notes: "After this mission you’ll likely be dirty – grab a bath at the hotel.",
-      tips: [],
+      notes: ["Bar fight with Javier and Bill."],
+      tips: [
+        "Knock out Tommy within 1 minute 30 seconds.",
+        "Complete the mission without taking a hit.",
+        "Cause $4 worth of damage in the saloon."
+      ],
       link: "https://www.ign.com/wikis/red-dead-redemption-2/Americans_at_Rest"
     },
     {
       type: "Miscellaneous",
-      name: "Have a Bath",
+      name: "Take a Bath",
       location: "Valentine Hotel",
-      icon: "-",
-      notes: "Clean up after missions that make you dirty.",
+      icon: "",
+      notes: ["After ‘Americans at Rest,’ Arthur will be dirty. Take a bath."]
     },
     {
-      type: "Bandit Challenge",
-      name: "Hold up 5 townsfolk (Bandit 1)",
-      location: "Valentine outskirts",
-      icon: "H",
-      notes: "Choose people on the edge of town to avoid witnesses.",
-      link: "https://www.ign.com/wikis/red-dead-redemption-2/Bandit_Challenges"
+      type: "Challenge",
+      name: "Bandit 1 — Rob 5 Townsfolk",
+      location: "Valentine",
+      icon: "",
+      notes: ["Rob on the outskirts to avoid being reported."]
     },
     {
       type: "Story Mission",
       name: "The First Shall Be Last",
       location: "Blackwater, West Elizabeth",
       icon: "JE",
-      notes: "Rescue Sean with Javier and Charles.",
-      tips: [],
+      notes: ["Rescue Sean with Javier."],
+      tips: [
+        "Silently kill one guard with Javier.",
+        "Complete with at least 80% accuracy.",
+        "Complete within 11 minutes."
+      ],
       link: "https://www.ign.com/wikis/red-dead-redemption-2/The_First_Shall_Be_Last"
     },
     {
-      type: "Weapons Expert Challenge",
-      name: "Kill 2/3 Enemies with a Knife (Weapons Expert 1)",
-      location: "During 'The First Shall Be Last'",
-      icon: "H",
-      notes: "Silently kill one of the first guards with Javier.",
+      type: "Challenge",
+      name: "Weapons Expert 1 — Kill 3 Enemies with a Knife",
+      location: "During The First Shall Be Last",
+      icon: "",
+      notes: ["Get a stealth knife kill at the start."]
     },
     {
       type: "Stranger Mission",
       name: "Geology for Beginners",
       location: "Strawberry, West Elizabeth",
       icon: "?",
-      notes: "Meet Francis Sinclair to unlock the Rock Carvings quest.",
+      notes: ["Francis Sinclair introduces the Rock Carvings quest."],
       link: "https://www.ign.com/wikis/red-dead-redemption-2/Geology_for_Beginners"
     },
     {
-      type: "Explorer Challenge",
-      name: "Collect Jack Hall Treasure Map 3",
-      location: "Cottora Springs, Ambarino",
-      icon: "H",
-      notes: "Continue the Jack Hall Gang treasure trail.",
-      link: "https://www.ign.com/wikis/red-dead-redemption-2/Treasure_Maps"
+      type: "Challenge",
+      name: "Explorer 3 — Jack Hall Treasure Map 3",
+      location: "Cotorra Springs, Ambarino",
+      icon: "",
+      notes: ["Continue the Jack Hall Gang treasure hunt."]
     },
     {
-      type: "Gambler Challenge",
-      name: "Win 3 games of Five Finger Fillet (Gambler 3)",
-      location: "Valentine, New Hanover",
-      icon: "H",
-      notes: "Sleep between games at the hotel to reset opponents.",
-      link: "https://www.ign.com/wikis/red-dead-redemption-2/Gambler_Challenge"
+      type: "Challenge",
+      name: "Gambler 3 — Win 3 Games of Five Finger Fillet",
+      location: "Valentine",
+      icon: "",
+      notes: ["Win 3 matches of FFF to complete the challenge."]
     },
     {
-      type: "Stranger Mission",
-      name: "Wildlife Art Exhibition",
+      type: "Hunting Request",
+      name: "Wildlife Art Exhibition Poster",
       location: "Valentine Train Station",
-      icon: "?",
-      notes: "Check the Hunters Wanted Poster to activate hunting requests.",
-      link: "https://www.ign.com/wikis/red-dead-redemption-2/Hunters_Wanted"
+      icon: "",
+      notes: ["Activates hunting requests from Mrs. Hobbs."]
     },
     {
       type: "Bounty",
       name: "Ellie Anne Swann",
-      location: "Valentine, New Hanover",
+      location: "Valentine Sheriff’s Office",
       icon: "Bounty",
-      notes: "Available from the Sheriff’s Office. Loot her silver earrings for crafting.",
+      notes: ["Apprehend Ellie Anne Swann. Loot her for silver earrings."],
       link: "https://www.ign.com/wikis/red-dead-redemption-2/Ellie_Anne_Swann"
     },
     {
@@ -118,37 +125,39 @@ const chapter2Part2 = {
       name: "Exit, Pursued by a Bruised Ego",
       location: "Horseshoe Overlook",
       icon: "H",
-      notes: "Start with Hosea. During mission, kill a rabbit on horseback for Horseman Challenge 1.",
-      tips: [],
+      notes: ["Hunting trip with Hosea that unlocks the Legendary Bear hunt."],
+      tips: [
+        "Track the bear within 1 minute 30 seconds.",
+        "Shoot the bear at least 6 times.",
+        "Complete the mission within 12 minutes."
+      ],
       link: "https://www.ign.com/wikis/red-dead-redemption-2/Exit,_Pursued_by_a_Bruised_Ego"
     },
     {
-      type: "Horseman Challenge",
-      name: "Kill 1/5 rabbits from horseback (Horseman 1)",
-      location: "O'Creagh's Run, Ambarino",
-      icon: "H",
-      notes: "Don’t worry about perfect pelts — any rabbit counts.",
+      type: "Challenge",
+      name: "Horseman 1 — Kill a Rabbit from Horseback",
+      location: "During Exit, Pursued by a Bruised Ego",
+      icon: "",
+      notes: ["Kill a rabbit from horseback during the mission."]
     },
     {
       type: "Legendary Animal",
-      name: "Hunt Legendary Bear",
+      name: "Legendary Bear",
       location: "O'Creagh's Run, Ambarino",
-      icon: "H",
-      notes: "Stay after Hosea’s mission to hunt the bear.",
-      link: "https://www.ign.com/wikis/red-dead-redemption-2/Legendary_Animals"
+      icon: "",
+      notes: ["Remain in the area after the mission to hunt the Legendary Bear."]
     },
     {
-      type: "Explorer Challenge",
-      name: "Finish Jack Hall Gang Treasure (Explorer 4)",
+      type: "Challenge",
+      name: "Explorer 4 — Jack Hall Treasure",
       location: "O'Creagh's Run, Ambarino",
-      icon: "H",
-      notes: "Final Jack Hall Gang treasure map is seconds away from the bear hunt.",
-      link: "https://www.ign.com/wikis/red-dead-redemption-2/Treasure_Maps"
-    },
+      icon: "",
+      notes: ["Complete the final step of the Jack Hall Gang treasure trail."]
+    }
   ],
   outroText: [
-    "Part II completes multiple challenges, introduces Legendary Hunts, and finishes the Jack Hall Treasure line. It’s a busy section that rewards efficient planning.",
-  ],
+    "Part II completes multiple bounties, Stranger quests, and sets up your first legendary animal hunt. Careful planning allows overlap between challenges and missions."
+  ]
 };
 
 export default chapter2Part2;

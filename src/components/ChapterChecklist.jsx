@@ -1,5 +1,5 @@
 // src/components/ChapterChecklist.jsx
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 export default function ChapterChecklist({
   title,
@@ -11,39 +11,8 @@ export default function ChapterChecklist({
   introText = [],
   outroText = [],
 }) {
-  // storage key for expanded tips toggles
-  const titleKey = title ? title.replace(/[^a-z0-9]/gi, "_") : "unknown";
-  const expandKey = `rdr2_expand_${titleKey}`;
-
-  // expandedRows stores which rows (by index) show gold medal tips
   const [expandedRows, setExpandedRows] = useState({});
 
-  // load saved expand state
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem(expandKey);
-      if (saved) {
-        setExpandedRows(JSON.parse(saved));
-      }
-    } catch (e) {
-      setExpandedRows({});
-    }
-  }, [expandKey]);
-
-  // internal toggle that saves to localStorage
-  const toggleTips = (idx) => {
-    setExpandedRows((prev) => {
-      const next = { ...prev, [idx]: !prev[idx] };
-      try {
-        localStorage.setItem(expandKey, JSON.stringify(next));
-      } catch (e) {}
-      return next;
-    });
-  };
-
-  // Support two shapes:
-  // 1) activities = [ ... ] (array)
-  // 2) activities = { activities: [...], introText: [...], outroText: [...] } (object)
   const dataObj =
     activities && !Array.isArray(activities) ? activities : null;
 
@@ -61,7 +30,13 @@ export default function ChapterChecklist({
       ? outroText
       : dataObj?.outroText ?? [];
 
-  // completed count (checked array is managed by App)
+  const toggleTips = (idx) => {
+    setExpandedRows((prev) => ({
+      ...prev,
+      [idx]: !prev[idx],
+    }));
+  };
+
   const completed = items.reduce(
     (acc, _, i) => (Array.isArray(checked) && checked[i] ? acc + 1 : acc),
     0
@@ -77,28 +52,6 @@ export default function ChapterChecklist({
       }
     }
     return "-";
-  };
-
-  // helper to render RDR2-like map icons (string codes)
-  const renderMapIcon = (icon) => {
-    if (!icon || icon === "-") return <span className="text-gray-400">-</span>;
-    let bg = "bg-gray-600 text-white";
-    const ic = String(icon).toUpperCase();
-    if (ic === "RS") bg = "bg-yellow-500 text-black";
-    else if (ic === "H") bg = "bg-red-600 text-white";
-    else if (ic === "U") bg = "bg-blue-600 text-white";
-    else if (ic === "LS") bg = "bg-green-600 text-white";
-    else if (ic === "ML") bg = "bg-pink-500 text-white";
-    else if (ic === "K") bg = "bg-purple-600 text-white";
-    else if (ic === "?") bg = "bg-white text-black";
-    else if (ic === "BOUNTY" || ic === "B") bg = "bg-orange-600 text-black";
-    return (
-      <span
-        className={`inline-flex items-center justify-center h-7 w-7 rounded-full font-bold text-xs ${bg}`}
-      >
-        {icon}
-      </span>
-    );
   };
 
   return (
@@ -169,11 +122,24 @@ export default function ChapterChecklist({
               const hasTips = Array.isArray(item.tips) && item.tips.length > 0;
               const isExpanded = expandedRows[idx] || false;
 
+              // 🎨 Exact RDR2 icon colors
+              let iconStyle = {};
+              const t = (item.type || "").toString();
+              if (t === "Story Mission" || t === "Story") {
+                iconStyle = { backgroundColor: "#FFD700", color: "#000000" }; // gold/yellow
+              } else if (t === "Stranger Mission") {
+                iconStyle = { backgroundColor: "#FFFFFF", color: "#000000" }; // white
+              } else if (t === "Bounty") {
+                iconStyle = { backgroundColor: "#FF0000", color: "#FFFFFF" }; // bright red
+              }
+
               return (
                 <tr
                   key={key}
                   className={`${
-                    isChecked ? "bg-green-900/30" : "bg-black/10 hover:bg-black/20"
+                    isChecked
+                      ? "bg-green-900/30"
+                      : "bg-black/10 hover:bg-black/20"
                   }`}
                 >
                   <td className="px-4 py-2 border border-gray-600 align-top">
@@ -194,7 +160,16 @@ export default function ChapterChecklist({
                     {getField(item, "location")}
                   </td>
                   <td className="px-4 py-2 border border-gray-600 align-top">
-                    {renderMapIcon(getField(item, "icon"))}
+                    {item.icon ? (
+                      <span
+                        className="inline-flex items-center justify-center h-7 w-7 rounded-full font-bold"
+                        style={iconStyle}
+                      >
+                        {item.icon}
+                      </span>
+                    ) : (
+                      <span className="text-gray-400">–</span>
+                    )}
                   </td>
                   <td className="px-4 py-2 border border-gray-600 align-top text-sm text-gray-200">
                     {/* Notes */}
@@ -214,9 +189,8 @@ export default function ChapterChecklist({
                         <button
                           onClick={() => toggleTips(idx)}
                           className="text-xs text-yellow-400 hover:underline"
-                          aria-expanded={isExpanded}
                         >
-                          {isExpanded ? "Hide Gold Medal Tips" : "Show Gold Medal Tips"}
+                          {isExpanded ? "Hide Tips" : "Show Gold Medal Tips"}
                         </button>
 
                         {isExpanded && (
