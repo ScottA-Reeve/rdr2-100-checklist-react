@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import IntroSection from "./components/IntroSection";
 import BackToTopButton from "./components/BackToTopButton";
+import TopProgressBar from "./components/TopProgressBar";
 import OverallStrategy from "./components/OverallStrategy";
 import ChapterChecklist from "./components/ChapterChecklist";
 import ProgressOverview from "./components/ProgressOverview";
@@ -54,6 +55,19 @@ import epiloguePart4 from "./data/epilogue/part4";
 import epiloguePart5 from "./data/epilogue/part5";
 
 function App() {
+
+  // Compute overall progress totals
+  const computeTotals = () => {
+    let done = 0;
+    let total = 0;
+    for (const key in progress) {
+      const arr = progress[key] || [];
+      done += arr.filter(Boolean).length;
+      total += arr.length;
+    }
+    return { done, total };
+  };
+
   const [progress, setProgress] = useState({});
 
   const loadCheckedArray = (key, total) => {
@@ -151,10 +165,12 @@ function App() {
   };
 
   return (
+    <>
+      {(() => { const {done, total} = computeTotals(); return <TopProgressBar done={done} total={total} />; })()}
     <div className="min-h-screen bg-rdr2-bg bg-fixed bg-center bg-cover text-white font-serif scroll-smooth">
       <div className="min-h-screen bg-black/60 flex">
         {/* Sidebar */}
-        <aside className="hidden lg:block w-72 p-6 border-r border-gray-700 sticky top-0 self-start h-screen overflow-y-auto">
+        <aside className="hidden lg:block w-70 p-8 border-r border-gray-700 sticky top-0 self-start h-screen overflow-y-auto">
           <ProgressOverview
             chapters={[
               { key: "chapter1", title: "Chapter 1", total: chapter1Data.activities.length, checked: progress.chapter1 || [] },
@@ -244,7 +260,7 @@ function App() {
           </div>
 
           {/* Chapter 1 */}
-          <CollapsibleSection title="Chapter 1" defaultOpen>
+          <CollapsibleSection id="chapter-1" title="Chapter 1" defaultOpen>
             <ChapterChecklist
               title="Chapter 1"
               activities={chapter1Data}
@@ -258,7 +274,7 @@ function App() {
           </CollapsibleSection>
 
           {/* Chapter 2 */}
-          <CollapsibleSection title="Chapter 2">
+          <CollapsibleSection id="chapter-2" title="Chapter 2">
             {[chapter2Part1, chapter2Part2, chapter2Part3, chapter2Part4, chapter2Part5, chapter2Part6, chapter2Part7].map((data, i) => (
               <CollapsibleSection key={`chapter2Part${i + 1}`} title={`Part ${i + 1}`} defaultOpen={i === 0}>
                 <ChapterChecklist
@@ -274,7 +290,7 @@ function App() {
           </CollapsibleSection>
 
           {/* Chapter 3 */}
-          <CollapsibleSection title="Chapter 3">
+          <CollapsibleSection id="chapter-3" title="Chapter 3">
             {[chapter3Part1, chapter3Part2, chapter3Part3, chapter3Part4, chapter3Part5, chapter3Part6, chapter3Part7, chapter3Part8, chapter3Part9].map((data, i) => (
               <CollapsibleSection key={`chapter3Part${i + 1}`} title={`Part ${i + 1}`} defaultOpen={i === 0}>
                 <ChapterChecklist
@@ -290,7 +306,7 @@ function App() {
           </CollapsibleSection>
 
           {/* Chapter 4 */}
-          <CollapsibleSection title="Chapter 4">
+          <CollapsibleSection id="chapter-4" title="Chapter 4">
             {[chapter4Part1, chapter4Part2, chapter4Part3, chapter4Part4, chapter4Part5, chapter4Part6].map((data, i) => (
               <CollapsibleSection key={`chapter4Part${i + 1}`} title={`Part ${i + 1}`} defaultOpen={i === 0}>
                 <ChapterChecklist
@@ -306,7 +322,7 @@ function App() {
           </CollapsibleSection>
 
           {/* Chapter 5 */}
-          <CollapsibleSection title="Chapter 5">
+          <CollapsibleSection id="chapter-5" title="Chapter 5">
             <ChapterChecklist
               title="Chapter 5"
               activities={chapter5Data}
@@ -320,7 +336,7 @@ function App() {
           </CollapsibleSection>
 
           {/* Chapter 6 */}
-          <CollapsibleSection title="Chapter 6">
+          <CollapsibleSection id="chapter-6" title="Chapter 6">
             {[chapter6Part1, chapter6Part2, chapter6Part3, chapter6Part4, chapter6Part5].map((data, i) => (
               <CollapsibleSection key={`chapter6Part${i + 1}`} title={`Part ${i + 1}`} defaultOpen={i === 0}>
                 <ChapterChecklist
@@ -336,7 +352,7 @@ function App() {
           </CollapsibleSection>
 
           {/* Epilogue */}
-          <CollapsibleSection title="Epilogue">
+          <CollapsibleSection id="epilogue" title="Epilogue">
             {[epiloguePart1, epiloguePart2, epiloguePart3, epiloguePart4, epiloguePart5].map((data, i) => (
               <CollapsibleSection key={`epiloguePart${i + 1}`} title={`Part ${i + 1}`} defaultOpen={i === 0}>
                 <ChapterChecklist
@@ -352,13 +368,14 @@ function App() {
           </CollapsibleSection>
 
           {/* Summary */}
-          <CollapsibleSection title="Summary & Acknowledgements">
+          <CollapsibleSection id="summary" title="Summary & Acknowledgements">
             <p>Placeholder for summary and acknowledgements.</p>
           </CollapsibleSection>
         </main>
-      </div>
       <BackToTopButton />
+	  </div>
     </div>
+	</>
   );
 }
 

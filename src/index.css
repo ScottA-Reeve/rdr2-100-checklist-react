@@ -6,3 +6,7 @@
 html {
   scroll-behavior: smooth;
 }
+/* Prevent sticky top bar from covering anchor targets */
+[id] {
+  scroll-margin-top: 40px; /* adjust if your top bar is taller/shorter */
+}

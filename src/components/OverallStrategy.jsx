@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
-import { ChevronDown, ChevronRight } from "lucide-react";
+// src/components/OverallStrategy.jsx
+import React from "react";
+import CollapsibleSection from "./CollapsibleSection";
 
 const sections = [
   {
+    id: "overall-strategy-checklist",
     title: "Full Completion Checklist",
     content: `Here’s the complete list of activities required for 100% completion. Many of these overlap, so some will automatically be checked off as you progress.
 
@@ -52,6 +54,7 @@ Miscellaneous:
 - 4 Robberies: Coach, Home, Shop, Train`,
   },
   {
+    id: "overall-strategy-superfluous",
     title: "Superfluous Tasks (Auto-Completed)",
     content: `Some activities are covered by challenges and don’t need to be planned separately:
 - 10 Fish → Survivalist 10
@@ -62,6 +65,7 @@ Miscellaneous:
 - 1 Treasure Hunter Chain → Explorer Challenge`,
   },
   {
+    id: "overall-strategy-natural",
     title: "Tasks You’ll Complete Naturally",
     content: `These happen organically while progressing:
 - All Story Missions
@@ -74,6 +78,7 @@ Miscellaneous:
 - 5 Ranters, Ravers, and Campaigners (approach white dots)`,
   },
   {
+    id: "overall-strategy-before-ch6",
     title: "Before Chapter 6 Ends",
     content: `Aim to complete these before the story transition:
 - 10 Stranger Missions
@@ -90,6 +95,7 @@ Miscellaneous:
 - Bandit, Explorer, Gambler, Master Hunter, Sharpshooter, Survivalist & Weapons Expert Challenges`,
   },
   {
+    id: "overall-strategy-across-ch6",
     title: "Complete Across Chapter 6",
     content: `Some tasks start before Chapter 6 but finish after:
 - 30 Dinosaur Bones
@@ -99,6 +105,7 @@ Miscellaneous:
 - Horseman Challenges (1–8 before, 9 easier post-Chapter 6)`,
   },
   {
+    id: "overall-strategy-after-ch6",
     title: "After Chapter 6",
     content: `These are only possible after the story shift:
 - 9 Graves
@@ -107,6 +114,7 @@ Miscellaneous:
 - 48 Weapons (majority before, mop-up later)`,
   },
   {
+    id: "overall-strategy-priorities",
     title: "Essential Early Priorities",
     content: `- Kill the Legendary Buck early and craft the Buck Antler Trinket. It boosts pelt quality and saves huge amounts of time on hunting tasks.
 - Craft the Legend of the East Satchel as early as possible. It isn’t required for 100%, but makes life much easier by expanding carrying capacity.
@@ -115,6 +123,7 @@ Miscellaneous:
 - If you skip the Satchel, postpone Herbalist 7 & 8 and Smoking and Other Hobbies until the Epilogue.`,
   },
   {
+    id: "overall-strategy-notes",
     title: "Special Notes",
     content: `The Exotics:
 - Exotic birds don’t need perfect pelts. Use Dead Eye + repeater.
@@ -143,84 +152,21 @@ Other Considerations:
 ];
 
 export default function OverallStrategy() {
-  const [openStates, setOpenStates] = useState(() => {
-    const saved = localStorage.getItem("overallStrategyOpenStates");
-    return saved ? JSON.parse(saved) : Array(sections.length).fill(false);
-  });
-
-  useEffect(() => {
-    localStorage.setItem(
-      "overallStrategyOpenStates",
-      JSON.stringify(openStates)
-    );
-  }, [openStates]);
-
-  const toggleSection = (index) => {
-    setOpenStates((prev) => {
-      const updated = [...prev];
-      updated[index] = !updated[index];
-      return updated;
-    });
-  };
-
-  const expandAll = () => setOpenStates(Array(sections.length).fill(true));
-  const collapseAll = () => setOpenStates(Array(sections.length).fill(false));
-
   return (
-    <div className="space-y-4 w-full">
+    <div className="space-y-6">
       <h2 className="text-2xl font-bold mb-4">Overall Strategy</h2>
-
-      <div className="flex gap-2 mb-4">
-        <button
-          onClick={expandAll}
-          className="px-3 py-1 rounded-md bg-green-600 hover:bg-green-700 text-sm"
+      {sections.map((section, index) => (
+        <CollapsibleSection
+          key={index}
+          id={section.id}
+          title={section.title}
+          defaultOpen={index === 0}
         >
-          Expand All
-        </button>
-        <button
-          onClick={collapseAll}
-          className="px-3 py-1 rounded-md bg-red-600 hover:bg-red-700 text-sm"
-        >
-          Collapse All
-        </button>
-      </div>
-
-      {sections.map((section, index) => {
-        const isOpen = openStates[index];
-        return (
-          <div
-            key={index}
-            className="rounded-2xl shadow-md border bg-white/90 dark:bg-gray-900 w-full"
-          >
-            <button
-              className={`flex justify-between items-center w-full text-left px-4 py-3 transition-colors duration-200 rounded-t-2xl ${
-                isOpen ? "bg-gray-200 dark:bg-gray-800" : ""
-              }`}
-              onClick={() => toggleSection(index)}
-              aria-expanded={isOpen}
-              aria-controls={`section-${index}`}
-            >
-              <span className="font-semibold text-lg text-black dark:text-white">
-                {section.title}
-              </span>
-              {isOpen ? <ChevronDown /> : <ChevronRight />}
-            </button>
-
-            <div
-              id={`section-${index}`}
-              className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
-              }`}
-            >
-              <div className="px-4 pb-4 border-t border-gray-300 dark:border-gray-700 rounded-b-2xl">
-                <p className="mt-3 whitespace-pre-line text-gray-800 dark:text-gray-300">
-                  {section.content}
-                </p>
-              </div>
-            </div>
-          </div>
-        );
-      })}
+          <p className="whitespace-pre-line text-gray-200 dark:text-gray-300">
+            {section.content}
+          </p>
+        </CollapsibleSection>
+      ))}
     </div>
   );
 }
